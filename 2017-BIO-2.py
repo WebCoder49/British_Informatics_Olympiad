@@ -75,7 +75,7 @@ class Grid:
             if(self.vertical_lines[x][y]): return False # Already taken
             self.vertical_lines[x][y] = True
 
-            if(x != (self.width - 1) and y != (self.height - 1)):
+            if(x != (self.width - 1) and y != 0):
                 if(self.horizontal_lines[y][x] and self.horizontal_lines[y+1][x] and self.vertical_lines[x+1][y]):
                     # Box to right
                     self.boxes_won[y][x] = player
@@ -95,7 +95,7 @@ class Grid:
                     self.boxes_won[y][x] = player
 
             if (y != 0 and x != (self.width - 1)):
-                if (self.horizontal_lines[x][y - 1] and self.horizontal_lines[x + 1][y - 1] and self.horizontal_lines[y - 1][x]):
+                if (self.vertical_lines[x][y - 1] and self.vertical_lines[x + 1][y - 1] and self.horizontal_lines[y - 1][x]):
                     # Box above
                     self.boxes_won[y - 1][x] = player
 
@@ -114,9 +114,14 @@ class Player:
         self.position = self.position % grid.size
 
         for i in range(grid.size): # Keep trying for every position in grid if not successful
-            for direction in range(4):
-                if(grid.draw_line(self.id, self.position, direction)):
-                    return  # Successful
+            if(self.anticlockwise):
+                for direction in range(0, -4, -1):
+                    if(grid.draw_line(self.id, self.position, direction%4)):
+                        return  # Successful
+            else:
+                for direction in range(4):
+                    if(grid.draw_line(self.id, self.position, direction)):
+                        return  # Successful
 
             # Not successful - increment
             self.position += 1
