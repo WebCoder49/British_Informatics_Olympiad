@@ -78,11 +78,13 @@ class Grid:
             if(x != (self.width - 1) and y != 0):
                 if(self.horizontal_lines[y][x] and self.horizontal_lines[y+1][x] and self.vertical_lines[x+1][y]):
                     # Box to right
+                    print(player, x, y, "right", self.horizontal_lines, self.vertical_lines)
                     self.boxes_won[y][x] = player
 
             if(x != 0 and y != (self.height - 1)):
                 if (self.horizontal_lines[y][x-1] and self.horizontal_lines[y + 1][x-1] and self.vertical_lines[x - 1][y]):
                     # Box to left
+                    print(player, x, y, "left", self.horizontal_lines, self.vertical_lines)
                     self.boxes_won[y][x-1] = player
         else:
             # Odd - horizontal lines
@@ -92,18 +94,20 @@ class Grid:
             if (y != (self.height - 1) and x != (self.width - 1)):
                 if (self.vertical_lines[x][y] and self.vertical_lines[x + 1][y] and self.horizontal_lines[y + 1][x]):
                     # Box below
+                    print(player, x, y, "below", self.horizontal_lines, self.vertical_lines)
                     self.boxes_won[y][x] = player
 
             if (y != 0 and x != (self.width - 1)):
                 if (self.vertical_lines[x][y - 1] and self.vertical_lines[x + 1][y - 1] and self.horizontal_lines[y - 1][x]):
                     # Box above
+                    print(player, x, y, "above", self.horizontal_lines, self.vertical_lines)
                     self.boxes_won[y - 1][x] = player
 
         return True
 
 class Player:
     def __init__(self, id, position, modifier, anticlockwise):
-        self.position = position - 1 # zero-indexed
+        self.position = position-1 # zero-indexed
         self.modifier = modifier
         self.anticlockwise = anticlockwise
         self.id = id
@@ -117,10 +121,12 @@ class Player:
             if(self.anticlockwise):
                 for direction in range(0, -4, -1):
                     if(grid.draw_line(self.id, self.position, direction%4)):
+                        print(self.id, self.position, "urdl"[direction])
                         return  # Successful
             else:
                 for direction in range(4):
                     if(grid.draw_line(self.id, self.position, direction)):
+                        print(self.id, self.position, "urdl"[direction])
                         return  # Successful
 
             # Not successful - increment
