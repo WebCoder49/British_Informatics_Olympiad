@@ -4,7 +4,7 @@ import random
 
 class Trail:
 
-    trail = []
+    trail = [[0, 0]] # Contain initial square
 
     def __init__(self, trail_len):
         self.trail_len = trail_len
@@ -19,7 +19,7 @@ class Trail:
             self.trail.pop(0)
 
     def is_blocked(self, coords):
-        print(coords, self.trail)
+        # print(coords, self.trail)
         return coords in self.trail
 
 class Explorer:
@@ -34,7 +34,7 @@ class Explorer:
 
     def final_coordinates(self, n_of_moves):
         for i in range(n_of_moves):
-            print(i, "***")
+            # print(i, "***")
             # Follow instructions
             instruction = self.instructions[i % self.instruction_len]
             if(instruction == "R"):
@@ -61,11 +61,11 @@ class Explorer:
 
     def move(self):
         next_square = self.next_square(self.coords, self.direction)
-        print(self.coords, ">", self.direction, ">", next_square)
+        # print(self.coords, ">", self.direction, ">", next_square)
         if(self.trail.is_blocked(next_square)):
-            print("BLOCKED", self.trail.trail)
             self.direction += 1 # 90deg right
             self.direction %= 4
+            # print("BLOCKED", self.direction)
             return self.move()
         else:
             self.trail.move(next_square)
