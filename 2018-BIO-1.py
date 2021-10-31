@@ -1,4 +1,7 @@
 # Debt Repayment
+
+# After marking - this
+
 import math
 
 debt = 100
@@ -10,7 +13,7 @@ def round_up_2dp(number):
     number *= 100
 
     # Remove small "impurities" which change ceiling
-    number = (number*100)//100
+    # number = (number*10000)//10000
 
     number = math.ceil(number)
 
@@ -27,7 +30,6 @@ while(debt > 0):
     debt = round_up_2dp(debt * interest) # Add interest
 
     repayment = round_up_2dp(repay * debt)
-    print(repayment, debt)
 
     if(repayment < 50):
         repayment = 50
