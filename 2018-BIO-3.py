@@ -1,15 +1,26 @@
 # Serial Numbers
 
+from collections import deque
+
 class SerialNumberGraph:
-    distances = {}
+    visited_set = set()
+    unvisited_queue = deque()
 
-    def __init__(self, digits, starting_number):
-        print(self.transformations(starting_number, [starting_number], 0))
+    def __init__(self, digits):
+        self.digits = digits
 
-    def transformations(self, serial_number:list, already_visited, level):
+    def to_string(self, arr:list):
+        string = ""
+        for i in arr:
+            string += i
+
+        return string
+
+    def transformations(self, serial_number:str):
 
         transformations = []
-        for i in range(len(serial_number)-2):
+        for i in range(self.digits-2):
+            # Traverse string;
 
             transformation = []
             for digit in serial_number:
@@ -18,30 +29,38 @@ class SerialNumberGraph:
             min_digit = min(serial_number[i], serial_number[i+1])
             max_digit = max(serial_number[i], serial_number[i+1])
 
-            if(serial_number[i-1] > min_digit and serial_number[i-1] < max_digit) or (serial_number[i+2] > min_digit and serial_number[i+2] < max_digit):
+            if(serial_number[i-1] > min_digit and serial_number[i-1] < max_digit and i > 0) or (serial_number[i+2] > min_digit and serial_number[i+2] < max_digit and i < self.digits-2):
                 # Adjacent digit lies between
                 # Swap indexes i and i+1
                 transformation[i] = serial_number[i+1]
                 transformation[i+1] = serial_number[i]
 
-                transformations.append(transformation)
+                transformations.append(self.to_string(transformation))
 
+        return transformations
 
-        max_distance = 1
-        already_visited_next_level = already_visited+transformations
+    def longest_path(self, current_number:str):
+        self.unvisited_queue = deque() # Empty
+        self.unvisited_queue.append((current_number, 0))
+        self.visited_set = set() # Empty
+        self.visited_set.add(current_number)
 
-        print(">" * level, serial_number)
-        for transformation in transformations:
-            if(not transformation in already_visited):
-                distance = 1+self.transformations(transformation, already_visited_next_level, level+1)
-                if(distance > max_distance):
-                    max_distance = distance
+        # Breadth-first search
 
-        self.distances["".join(serial_number)] = max_distance
-        print("<"*level, serial_number, max_distance, self.distances, transformations)
+        while(len(self.unvisited_queue) > 0):
+            current = self.unvisited_queue.popleft()
+            dist = current[1]
+            current = current[0]
+            for t in self.transformations(current):
+                if(not t in self.visited_set):
+                    self.unvisited_queue.append((t, dist+1))
+                    self.visited_set.add(t)
+            print(self.unvisited_queue)
+        print(len(self.visited_set), self.visited_set)
+        return dist
 
-        return max_distance
-
-
-serial_number = list(input("Serial Number: "))
-serial_number_graph = SerialNumberGraph(len(serial_number), serial_number)
+while True:
+    digits = int(input("Number of Digits: "))
+    serial_number = input("Serial Number: ")
+    graph = SerialNumberGraph(digits)
+    print(graph.longest_path(serial_number))
