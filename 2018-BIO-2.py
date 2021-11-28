@@ -30,7 +30,7 @@ class Decoder:
         for char in word:
             if(char in self.first_ring_indexes):
 
-                first_ring_index = self.first_ring_indexes[char]
+                first_ring_index = self.first_ring_indexes[char] # Could use ord to get ASCII code then subtract ord(A)
                 second_ring_index = (first_ring_index + index_offset) % 26 # Added modulus after seeing markscheme
                 encrypted += self.second_ring[second_ring_index]
 

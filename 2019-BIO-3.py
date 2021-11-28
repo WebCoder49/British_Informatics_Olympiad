@@ -19,7 +19,7 @@ def from_letters(chain):
 
 def block_chains(chain:list, length:int):
     if(len(chain) == length):
-        #print(to_letters(chain), ": Found a block-chain!")
+        # print(to_letters(chain), ": Found a block-chain!")
         return 1 # Found a blockchain!
     else:
         min_first = length # First of two adjacent letters, any larger letter after indicates 2-in-a-row
@@ -34,9 +34,9 @@ def block_chains(chain:list, length:int):
                     min_second = block
                 elif (block > min_second):
                     # Third in a row
-                    print(to_letters(chain), ": Three-in-a-row - dead end")
+                    # print(to_letters(chain), ": Three-in-a-row - dead end")
                     return 0
-        print(to_letters(chain), ": Any letter up to", to_letters([min_second]))
+        # print(to_letters(chain), ": Any letter up to", to_letters([min_second]))
 
         chains = 0
         for i in range(min_second):

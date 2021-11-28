@@ -1,6 +1,7 @@
 # Debt Repayment
 
 # After marking - this
+"""Don't be afraid of representing fixed-point numbers as ints."""
 # Keeping numbers as ints simulating fixed-point 2dp numbers
 
 import math

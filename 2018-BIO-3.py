@@ -1,6 +1,6 @@
 # Serial Numbers
 
-from collections import deque
+from collections import deque  # Built-in
 
 class SerialNumberGraph:
     visited_set = set()
@@ -19,7 +19,7 @@ class SerialNumberGraph:
     def transformations(self, serial_number:str):
 
         transformations = []
-        for i in range(self.digits-2):
+        for i in range(self.digits-1):
             # Traverse string;
 
             transformation = []
@@ -29,11 +29,14 @@ class SerialNumberGraph:
             min_digit = min(serial_number[i], serial_number[i+1])
             max_digit = max(serial_number[i], serial_number[i+1])
 
-            if(serial_number[i-1] > min_digit and serial_number[i-1] < max_digit and i > 0) or (serial_number[i+2] > min_digit and serial_number[i+2] < max_digit and i < self.digits-2):
+            if(i > 0 and (serial_number[i-1] > min_digit and serial_number[i-1] < max_digit)) or (i < self.digits-2 and (serial_number[i+2] > min_digit and serial_number[i+2] < max_digit)):
+                # Boolean short-circuiting - a Boolean and will not evaluate the right-hand-side if the left is False; or will not evaluate right if left is True -
+
                 # Adjacent digit lies between
                 # Swap indexes i and i+1
                 transformation[i] = serial_number[i+1]
                 transformation[i+1] = serial_number[i]
+                # print(i, serial_number, transformation, serial_number[i-1] > min_digit and serial_number[i-1] < max_digit and i > 0, serial_number[i+2] > min_digit and serial_number[i+2] < max_digit and i < self.digits-2)
 
                 transformations.append(self.to_string(transformation))
 
@@ -51,6 +54,8 @@ class SerialNumberGraph:
             current = self.unvisited_queue.popleft()
             dist = current[1]
             current = current[0]
+            # self.visited_set.add(current)
+
             for t in self.transformations(current):
                 if(not t in self.visited_set):
                     self.unvisited_queue.append((t, dist+1))
