@@ -1,5 +1,7 @@
 # Block-chain
 
+from functools import lru_cache
+
 # Depth-first search
 alphabet = "ABCDEFGHIJKLMNOPQRST"
 alphabet_dict = {}
@@ -17,7 +19,8 @@ def from_letters(chain):
         result.append(alphabet_dict[letter])
     return result
 
-def block_chains(chain:list, length:int):
+@lru_cache(maxsize=None)
+def block_chains(chain:tuple, length:int):
     if(len(chain) == length):
         # print(to_letters(chain), ": Found a block-chain!")
         return 1 # Found a blockchain!
@@ -43,12 +46,13 @@ def block_chains(chain:list, length:int):
             # Third < min_second, to prevent 3-in-a-row
             if(not i in chain):
                 # Possible chain
-                chains += block_chains(chain + [i], length)
+                chains += block_chains(chain + (i,), length)
         return chains
 
+while True:
 
-chain = from_letters(input("Chain: "))
-for i in range(len(chain)):
-    chain[i] = int(chain[i])
-length = int(input("No. of letters: "))
-print("Answer:", block_chains(chain, length))
+    chain = from_letters(input("Chain: "))
+    for i in range(len(chain)):
+        chain[i] = int(chain[i])
+    length = int(input("No. of letters: "))
+    print("Answer:", block_chains(tuple(chain), length))

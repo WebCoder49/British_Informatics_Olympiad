@@ -6,9 +6,9 @@
 # 1+1+1+1=4 with 1 digit, 3+2+1=6 with 2 digits, (2+1)+(1)=4 with 3 digits
 import math
 
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-def number_of_passwords(digits_usable, spaces_available):
+def number_of_passwords(digits_usable, spaces_available): # Could also use comb function
     number = 1
 
     # Find number of diff. orders
@@ -34,7 +34,7 @@ def to_alphabet(password):
 
 while True:
 
-    ALPHABET_DIGITS = 36  # 26+10
+    ALPHABET_DIGITS = len(ALPHABET) # 26+10
     permutations_remaining = int(input("PWD Index: "))-1  # 0-indexed
 
     # Get number of digits in password = length

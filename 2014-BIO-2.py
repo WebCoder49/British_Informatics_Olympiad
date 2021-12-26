@@ -123,7 +123,5 @@ def input_grid():
 
     return grid
 
-
-while input("> ") != "q":
-    board = Board(input_grid())
-    print(board.loops(0), board.loops(1))
+board = Board(input_grid())
+print(board.loops(0), board.loops(1))
