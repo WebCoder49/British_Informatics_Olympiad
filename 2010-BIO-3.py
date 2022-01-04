@@ -4,6 +4,7 @@ from copy import copy
 
 
 def possible_steps(total_capacities:tuple, current_capacities:tuple, no_of_jugs):
+    print("Finding ")
     dests = []
     for src_i in range(no_of_jugs):
         src_current_capacity = current_capacities[src_i]
@@ -31,11 +32,11 @@ def possible_steps(total_capacities:tuple, current_capacities:tuple, no_of_jugs)
                     dest_current_capacity += src_current_capacity
                     if(dest_current_capacity > dest_total_capacity):
                         # Overflow back to src
-                        src_current_capacity = dest_current_capacity - dest_total_capacity
+                        src_next_capacity = dest_current_capacity - dest_total_capacity # After marking - Don't use current capacity as one of multiple next steps
                         dest_current_capacity = dest_total_capacity
                     else:
-                        src_current_capacity = 0 # Completely emptied
-                    next_capacities[src_i] = src_current_capacity
+                        src_next_capacity = 0 # Completely emptied
+                    next_capacities[src_i] = src_next_capacity
                     next_capacities[dest_i] = dest_current_capacity
 
                     yield tuple(next_capacities)
@@ -54,8 +55,10 @@ def search_capacity(jug_capacities:tuple, target_capacity:int):
     not_found = True
     while not_found:
         dist, current_node = queue.pop()
+        # print(dist, current_node) # After
         dist = dist + 1
         for next_node in possible_steps(jug_capacities, current_node, no_of_jugs):
+            # print("-->", next_node)
             if(target_capacity in next_node):
                 not_found = False
                 break # No need to find other
@@ -74,4 +77,5 @@ jug_capacities = tuple(
     map(int, input().split())  # Turn space-separated input into tuple of ints
 )[:no_of_jugs]
 
-print("{} steps".format(search_capacity((3, 5), 4)))
+# After marking
+print("{} steps".format(search_capacity(jug_capacities, target_capacity))) # Careless error: Needed to pass in inputs here
