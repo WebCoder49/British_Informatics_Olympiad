@@ -1,4 +1,5 @@
 # String Theory
+# DO NOT TRY TO OPTIMISE CODE IF OPTIMISATION BECOMES TOO COMPLICATED.
 
 # # Too complicated - should use iterative method
 #
@@ -70,8 +71,8 @@
 
 # Simpler - more foolproof, but less optimisation
 
-string = input()
-# string = "AZCYB"
+# string = input().upper()
+string = "AZCYB"
 chars = list(string)
 
 def alphabet_i(uppercase_letter):
@@ -97,10 +98,9 @@ while(has_portals):
             first_letter = None
             second_letter = None
 
-            if(i != len(chars)-1):
-                # Previously i+1
-                second_letter = chars[i+1]
-                del chars[i+1]
+            # Previously i+1; not last char as must have second to be pair
+            second_letter = chars[i+1]
+            del chars[i+1]
             if(i != 0):
                 first_letter = chars[i-1]
                 del chars[i-1]
