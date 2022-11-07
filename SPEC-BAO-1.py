@@ -1,4 +1,8 @@
 # String Theory
+
+# 2022-11-07 Marking (1 right, 0 wrong, * bug):
+# 111111111 17/17
+
 # DO NOT TRY TO OPTIMISE CODE IF OPTIMISATION BECOMES TOO COMPLICATED.
 
 # # Too complicated - should use iterative method
@@ -71,8 +75,7 @@
 
 # Simpler - more foolproof, but less optimisation
 
-# string = input().upper()
-string = "AZCYB"
+string = input().upper()
 chars = list(string)
 
 def alphabet_i(uppercase_letter):
@@ -86,7 +89,7 @@ len_chars = len(chars)
 while(has_portals):
     has_portals = False
     if (tuple(chars) in visited_words):
-        print("Infinite")
+        print("Indefinite") # EBI: Remember to print correct thing
         break
     visited_words.add(tuple(chars))
 

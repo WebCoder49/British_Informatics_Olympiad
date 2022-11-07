@@ -1,4 +1,8 @@
 # Box constellations
+
+# 2022-11-07 Marking (1 right, 0 wrong, * bug):
+# 11111 18/18
+
 import math
 import time
 
