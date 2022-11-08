@@ -93,6 +93,8 @@ while(has_portals):
         break
     visited_words.add(tuple(chars))
 
+    print(chars)
+
     for i in range(0, len_chars-1):
         first_i = alphabet_i(chars[i])
         second_i = alphabet_i(chars[i + 1])
