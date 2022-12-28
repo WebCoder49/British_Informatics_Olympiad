@@ -26,8 +26,8 @@ def number_of_passwords(digits_usable, spaces_available): # Could also use comb 
 def to_alphabet(password):
     string = ""
     for char in password:
-        if len(alphabet) > char:
-            string += alphabet[char]
+        if len(ALPHABET) > char:
+            string += ALPHABET[char]
         else:
             print(string, char)
     return string
