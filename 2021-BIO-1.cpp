@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 2022-11-07 Marking (1 right, 0 wrong, * bug):
+// 2023-11-11 Marking (1 right, 0 wrong, * bug):
 // 11111111111 24/24
 
 bool splitPatReversed(int pat[], int start, int end);
