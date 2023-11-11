@@ -104,7 +104,8 @@ grid = []
 for y in range(5):
     row = []
     for x in range(5):
-        row.append(random.choice("RGBYMCDL"))
+        row.append(random.choice("RGBDL"))
+        # row.append(random.choice("RGBYMCDL"))
     grid.append(row)
 
 puzzle = Puzzle(grid)
