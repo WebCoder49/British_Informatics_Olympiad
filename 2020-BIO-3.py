@@ -1,7 +1,6 @@
 # False plan
 from functools import lru_cache
 
-
 @lru_cache(maxsize=None) # Save previously found combinations
 def possible_plans(num_letters, plan_len, repeat_limit, repeats_so_far):
     if(repeats_so_far > repeat_limit):
