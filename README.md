@@ -13,4 +13,4 @@
 
 This code is licensed under the [Mozilla Public License v2.0](LICENSE), the same license as Mozilla Firefox and Thunderbird.
 
-It means you can share this code, and your modified versions of it, to anybody as long as whoever receives it retains this same right.
+It means you can share this code, and your modified versions of it, to anybody as long as whoever receives it retains this same right. You must attribute me (© Oliver Geer) as well.
